@@ -1,11 +1,5 @@
 import React from 'react'
-import { Platform } from 'react-native'
-import {
-  createAppContainer,
-  createStackNavigator,
-  createBottomTabNavigator,
-  createSwitchNavigator
-} from 'react-navigation'
+import { createAppContainer, createStackNavigator, createSwitchNavigator } from 'react-navigation'
 import { createMaterialBottomTabNavigator } from 'react-navigation-material-bottom-tabs'
 
 import { Feather } from '@expo/vector-icons'
