@@ -12,6 +12,7 @@ import SlideImages from '../../components/SlideImages'
 
 import language from '../../assets/language/iso.json'
 import { width } from '../../utils/Metrics'
+import { sliceArrayLength } from '../../utils'
 import styles from './styles'
 
 const renderTruncatedFooter = handlePress => {
@@ -73,10 +74,6 @@ export default class MovieDetailsScreen extends Component {
     return false
   }
 
-  sliceArrayLength(arr, num) {
-    return arr.length > num ? arr.slice(0, num) : arr
-  }
-
   convertRatingToStars(vote_average) {
     vote_average = vote_average > 5 ? Math.round(vote_average) : vote_average
     const length = vote_average !== 10 ? parseInt((vote_average + '').charAt(0)) - 5 : vote_average - 5
@@ -125,7 +122,7 @@ export default class MovieDetailsScreen extends Component {
   }
 
   formatImageUrl(images) {
-    return this.sliceArrayLength(images, 15).map(x => {
+    return sliceArrayLength(images, 15).map(x => {
       return { url: `https://image.tmdb.org/t/p/original/${x.file_path}` }
     })
   }
@@ -138,7 +135,7 @@ export default class MovieDetailsScreen extends Component {
       let response = await fetch(
         `https://api.themoviedb.org/3/movie/${id}?api_key=024d69b581633d457ac58359146c43f6&language=en-US&include_image_language=en,null&append_to_response=credits,videos,images`
       )
-      let data = await response.json()
+      const data = await response.json()
       this.setState({
         isLoading: false,
         isError: false,
@@ -149,16 +146,16 @@ export default class MovieDetailsScreen extends Component {
         video: data.videos.results[0] || [],
         runtime: data.runtime || 0,
         original_language: language[data.original_language] || '',
-        genre: this.sliceArrayLength(data.genres, 2) || '',
+        genre: sliceArrayLength(data.genres, 2) || '',
         release_date: data.release_date || '',
         budget: data.budget || 0,
         revenue: data.revenue || 0,
         adult: data.adult || '',
         overview: data.overview || '',
-        cast: this.sliceArrayLength(data.credits.cast, 15),
-        crew: this.sliceArrayLength(data.credits.crew, 15),
-        production_companies: this.sliceArrayLength(data.production_companies, 10),
-        images: this.formatImageUrl(data.images.backdrops)
+        cast: sliceArrayLength(data.credits.cast, 15),
+        crew: sliceArrayLength(data.credits.crew, 15),
+        production_companies: sliceArrayLength(data.production_companies, 10),
+        images: formatImageUrl(data.images.backdrops)
       })
     } catch (err) {
       this.setState({
