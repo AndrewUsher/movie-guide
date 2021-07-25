@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { AsyncStorage, Share, Linking, Alert, ScrollView, View, Text, Switch, TouchableOpacity } from 'react-native'
-import { Constants } from 'expo'
 
 import { Feather } from '@expo/vector-icons'
 

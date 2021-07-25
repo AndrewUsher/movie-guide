@@ -18,8 +18,8 @@
     "ios": "expo start --ios"
   },
   "dependencies": {
-    "expo": "^32.0.0",
-    "react": "16.5.0",
+    "expo": "^33.0.0",
+    "react": "16.8.3",
     "react-native": "https://github.com/expo/react-native/archive/sdk-32.0.0.tar.gz",
     "react-native-image-zoom-viewer": "^2.2.25",
     "react-native-modal": "^7.0.2",
